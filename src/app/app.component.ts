@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { PollCreateComponent } from './poll-create/poll-create.component';
 import { CommonModule } from '@angular/common';
 import { PollComponent } from './poll/poll.component';
+import { PollVoteComponent } from "./poll-vote/poll-vote.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PollCreateComponent, CommonModule, PollComponent],
+  imports: [RouterOutlet, PollCreateComponent, CommonModule, PollComponent, PollVoteComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
