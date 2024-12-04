@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { AfterViewInit, Component, Input, input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import ApexCharts from 'apexcharts';
   templateUrl: './poll-vote.component.html',
   styleUrl: './poll-vote.component.scss',
 })
-export class PollVoteComponent {
+export class PollVoteComponent implements AfterViewInit{
   @Input() voted: boolean | undefined;
   @Input() options: string[] | undefined;
   @Input() results: number[] | undefined;
@@ -23,7 +23,7 @@ export class PollVoteComponent {
     });
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     if (this.voted) {
       this.generateChart();
     }

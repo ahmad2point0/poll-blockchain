@@ -4,6 +4,7 @@ export interface poll{
   result:number[];
   options:string[];
   thumbnails:string;
+  voted:boolean;
 }
 export interface Voter{
   id:string;
