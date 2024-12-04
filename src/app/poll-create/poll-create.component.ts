@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PollForm } from '../types';
 @Component({
   selector: 'app-poll-create',
   standalone: true,
@@ -9,6 +10,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class PollCreateComponent {
   pollForm: FormGroup;
+
+  @Output() pollCreate: EventEmitter<PollForm> = new EventEmitter();
+
   constructor(private fb:FormBuilder){
     this.pollForm = this.fb.group({
       question:this.fb.control('',[Validators.required]),
@@ -19,6 +23,15 @@ export class PollCreateComponent {
     })
   }
   submitForm(){
-    console.log(this.pollForm.value);
+    const formData:PollForm={
+      question: this.pollForm.get("question")?.value,
+      thumbnails: this.pollForm.get("image")?.value,
+      options:[
+        this.pollForm.get("op1")?.value,
+        this.pollForm.get("op2")?.value,
+        this.pollForm.get("op3")?.value
+      ]
+    }
+    this.pollCreate.emit(formData);
   }
 }

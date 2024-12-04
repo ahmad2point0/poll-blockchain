@@ -13,12 +13,15 @@
   <p class="lead text-muted">Powered by Blockchain</p>
 </section>
 
-<app-poll-create *ngIf="showForm"></app-poll-create>
+<app-poll-create
+  *ngIf="showForm"
+  (pollCreate)="handlePollCreate($event)"
+></app-poll-create>
 
 <div class="d-flex">
   <div class="container poll-list">
     <app-poll
-      *ngFor="let poll of polls"
+      *ngFor="let poll of polls | async"
       [question]="poll.question"
       [votes]="poll.result"
       [voted]="poll.voted"
@@ -29,10 +32,12 @@
   <div class="container pull-details">
     <app-poll-vote
       *ngIf="activePoll"
+      [id]="activePoll.id"
       [voted]="activePoll.voted"
       [question]="activePoll.question"
       [results]="activePoll.result"
       [options]="activePoll.options"
+      (pollVoted)="handlePollVote($event)"
     ></app-poll-vote>
   </div>
 </div>
